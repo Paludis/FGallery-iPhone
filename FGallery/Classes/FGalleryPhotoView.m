@@ -45,6 +45,9 @@
 	// create an activity inidicator
 	_activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[self addSubview:_activity];
+    
+    UILongPressGestureRecognizer* pressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [self addGestureRecognizer:pressRecognizer];
 	
 	return self;
 }
@@ -76,7 +79,7 @@
 	// create outline
 	[self.layer setBorderWidth:1.0];
 	[self.layer setBorderColor:[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:.25] CGColor]];
-	
+
 	return self;
 }
 
@@ -245,5 +248,15 @@
     [super dealloc];
 }
 
+- (void) longPress:(UILongPressGestureRecognizer*)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        if ([photoDelegate respondsToSelector:@selector(didLongTapPhotoView:)])
+        {
+            [photoDelegate didLongTapPhotoView:self];
+        }
+    }
+}
 
 @end

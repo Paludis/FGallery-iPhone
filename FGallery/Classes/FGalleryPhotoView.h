@@ -42,6 +42,7 @@
 
 // indicates single touch and allows controller repsond and go toggle fullscreen
 - (void)didTapPhotoView:(FGalleryPhotoView*)photoView;
+- (void)didLongTapPhotoView:(FGalleryPhotoView*)photoView;
 
 @end
 

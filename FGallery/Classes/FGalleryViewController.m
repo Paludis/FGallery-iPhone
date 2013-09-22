@@ -639,6 +639,42 @@
 
 }
 
+- (void) didLongTapPhotoView:(FGalleryPhotoView *)photoView
+{
+    FGalleryPhoto* currentPhoto = [self currentPhoto];
+    if (currentPhoto.thumbnail || currentPhoto.fullsize)
+    {
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Save Image", nil), nil];
+        [actionSheet showInView:self.view];
+    }
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [actionSheet cancelButtonIndex])
+    {
+        FGalleryPhoto* currentPhoto = [self currentPhoto];
+        UIImage* imageToSave;
+        if (currentPhoto.fullsize)
+        {
+            imageToSave = currentPhoto.fullsize;
+        }
+        else
+        {
+            imageToSave = currentPhoto.thumbnail;
+        }
+        UIImageWriteToSavedPhotosAlbum(imageToSave, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+
+- (void) image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void*)contextInfo
+{
+    if (error != nil)
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Error saving your image to the camera roll: %@", nil), [error localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        [alert show];
+    }
+}
 
 - (void)updateCaption
 {
