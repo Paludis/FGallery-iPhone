@@ -1229,6 +1229,7 @@
     [_thumbsView release];
     _thumbsView = nil;
 	
+    _scroller.delegate = nil;
     [_scroller release];
     _scroller = nil;
 	
