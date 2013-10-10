@@ -473,14 +473,14 @@
 - (void)setUseThumbnailView:(BOOL)useThumbnailView
 {
     
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back", @"") style: UIBarButtonItemStyleBordered target: nil action: nil];
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"nav_button_back", nil) style: UIBarButtonItemStyleBordered target: nil action: nil];
     [[self navigationItem] setBackBarButtonItem: newBackButton];
     [newBackButton release];
     
     _useThumbnailView = useThumbnailView;
     if( self.navigationController ) {
         if (_useThumbnailView) {
-            UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"See all", @"") style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
+            UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"photo_viewer_see_all_photos", nil) style:UIBarButtonItemStylePlain target:self action:@selector(handleSeeAllTouch:)] autorelease];
             [self.navigationItem setRightBarButtonItem:btn animated:YES];
         }
         else {
@@ -671,7 +671,7 @@
 {
     if (error != nil)
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[NSString stringWithFormat:NSLocalizedString(@"error_saving_image", @"Error saving your image to the camera roll: %@"), [error localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil) message:[NSString stringWithFormat:NSLocalizedString(@"error_saving_image", @"Error saving your image to the camera roll: %@"), [error localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"button_ok", nil) otherButtonTitles:nil];
         [alert show];
     }
 }
