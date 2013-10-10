@@ -644,7 +644,7 @@
     FGalleryPhoto* currentPhoto = [self currentPhoto];
     if (currentPhoto.thumbnail || currentPhoto.fullsize)
     {
-        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Save Image", nil), nil];
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"cancel_button", @"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"save_image_button", @"Save Image"), nil];
         [actionSheet showInView:self.view];
     }
 }
@@ -671,7 +671,7 @@
 {
     if (error != nil)
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[NSString stringWithFormat:NSLocalizedString(@"Error saving your image to the camera roll: %@", nil), [error localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[NSString stringWithFormat:NSLocalizedString(@"error_saving_image", @"Error saving your image to the camera roll: %@"), [error localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
     }
 }
