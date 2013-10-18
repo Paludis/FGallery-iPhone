@@ -260,6 +260,30 @@
     [super viewDidUnload];
 }
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    UIEdgeInsets insets = UIEdgeInsetsMake([self getTopContentInset], 0, 0, 0);
+    [_thumbsView setContentInset:insets];
+    [_thumbsView setScrollIndicatorInsets:insets];
+}
+
+- (CGFloat) getTopContentInset
+{
+    CGFloat topInset = 0.0f;
+    if (self.navigationController.navigationBar.isTranslucent)
+    {
+        topInset += self.navigationController.navigationBar.frame.size.height;
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+        {
+            CGRect frame = [[UIApplication sharedApplication] statusBarFrame];
+            CGFloat statusBarHeight = MIN(frame.size.height, frame.size.width);
+            topInset += statusBarHeight;
+        }
+    }
+    return topInset;
+}
+
 
 - (void)destroyViews {
     // remove previous photo views
